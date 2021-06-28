@@ -1,6 +1,9 @@
 //get form
 const form = document.querySelector('form');
 // const format = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+/**
+ * emailValidator with regex
+ */
 const emailValidator = (email) => {
         const format = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         return email.match(format) ? true : false;
@@ -59,7 +62,7 @@ form.addEventListener('submit', async(e) => {
             }
         } else {
             //if email do not match
-            error.innerHTML = "<p>please enter a invalid email</p>"
+            error.innerHTML = "<p>please enter a valid email</p>"
         }
     } else {
         //check if the name is above or equal to two characters long

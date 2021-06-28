@@ -16,7 +16,7 @@ form.addEventListener('submit', async(e) => {
         const newPassword = password
 
         error.innerHTML = "";
-        //make a fetch request to /recovery-auth-pass
+        //make a fetch request to /recovery-auth-pass endpoint
         const result = await fetch('recovery-auth-pass', {
             headers: {
                 "Content-Type": "application/json"

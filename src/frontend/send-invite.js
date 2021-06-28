@@ -1,4 +1,6 @@
-//email validator
+/**
+ * emailValidator with regex
+ */
 const emailValidator = (email) => {
     const format = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     return email.match(format) ? true : false;
@@ -42,11 +44,11 @@ form.addEventListener('submit', async(e) => {
     //check valid mails
     let valid = mailsChecks(emailArray);
 
-    if (valid.errorMails.length > 1) {
-        return error.innerHTML = `correct the mail(s) and try again : ${errorMails}`
+    if (valid.errorMails.length > 0) {
+        return error.innerHTML = `correct the mail(s) and try again : ${valid.errorMails.join(", ")}`
     } else {
         emailList = valid.validMails.join(', ');
-        //make a fetch request to /dashboard/send-invite
+        //make a fetch request to /dashboard/send-invite endpoint
         const result = await fetch('dashboard/send-invite', {
             headers: {
                 "Content-Type": "application/json"
@@ -70,7 +72,7 @@ form.addEventListener('submit', async(e) => {
             location.assign(`${dataBody.url}`)
         } else if (data.status == 401) {
             // const dataBody = await result.json();
-            serverError.innerHTML = `<p>Unauthorize !you must be logged in to send an invite. login and try again</p>`
+            serverError.innerHTML = `<p>Unauthorized! You must be logged in to send an invite. login and try again</p>`
         } else if (data.status == 503) {
             // const dataBody = await result.json();
             serverError.innerHTML = `<p>Service is temporary down, we regret every inconvinience this may cause you</p>`
